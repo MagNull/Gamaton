@@ -1,18 +1,21 @@
 using System;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
     public class Timer
     {
-        private float _startTime;
+        private readonly float _startTime;
+        private readonly float _endTime;
         private float _timer;
         
         public event Action OnEnd;
 
-        public Timer(float time)
+        public Timer(float startTime, float endTime)
         {
-            _timer = time;
-            _startTime = time;
+            _startTime = startTime;
+            _endTime = endTime;
+            _timer = GetRandomTime();
         }
         
         public void Tick(float deltaTime)
@@ -27,7 +30,12 @@ namespace DefaultNamespace
         private void Reset()
         {
             OnEnd?.Invoke();
-            _timer = _startTime;
+            _timer = GetRandomTime();
+        }
+
+        private float GetRandomTime()
+        {
+            return Random.Range(_startTime, _endTime);
         }
     }
 }

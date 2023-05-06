@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using VContainer;
@@ -10,17 +11,19 @@ namespace DefaultNamespace.Enemies
         private int _damage;
         private int _health;
         private float _speed;
-        private float _endPositionY;
+        private float _centerPositionX;
+        private Vector3 _endPosition;
 
         public event Action<int> OnAttack;
         
         [Inject]
         public void Construct(City city, Configs configs)
         {
-            _endPositionY = city.transform.position.y;
+            _centerPositionX = city.transform.position.x;
             _speed = configs.EnemySpeed;
             _damage = configs.DriverDamage;
             _health = configs.DriverHealth;
+            _endPosition = configs.Spawns.Last(x => x != transform.position);
         }
         
         private void Start()
@@ -30,16 +33,20 @@ namespace DefaultNamespace.Enemies
 
         private void Move()
         {
-            var direction = new Vector2(0, _endPositionY);
-            var distance = Vector3.Distance(direction, transform.position);
-            var move = transform.DOMove(direction, distance / _speed);
-            move.onComplete += () => Attack();
-            move.onComplete += () => transform.DOMove(direction, distance / _speed);
-            move.onComplete += () => Destroy(this.gameObject);
+            var position = transform.position;
+            var center = new Vector2(_centerPositionX, position.y);
+            var distance = Vector3.Distance(center, position);
+
+            var sequence = DOTween.Sequence();
+            sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad).OnComplete(Attack));
+            sequence.Append(transform.DOMove(_endPosition, distance / _speed).SetEase(Ease.InQuad));
+            sequence.OnComplete(() => Destroy(gameObject));
+            sequence.Play();
         }
 
         public void Attack()
         {
+            Debug.Log("Attack");
             OnAttack?.Invoke(_damage);
         }
     }
