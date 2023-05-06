@@ -9,6 +9,8 @@ public class Bootstrap : LifetimeScope
     private Configs _configs;
     [SerializeField] 
     private City _city;
+    [SerializeField]
+    private InputBinder _inputBinder;
 
     private Updater _updater;
     private float _timer = 0f;
@@ -20,6 +22,11 @@ public class Bootstrap : LifetimeScope
         builder.RegisterComponent(_city);
         builder.RegisterComponent(_configs);
         builder.RegisterComponent(_updater);
+        builder.RegisterComponent(_inputBinder);
+
+        var shooter = new Shooter(_city, _configs);
+        builder.RegisterComponent(shooter);
+
         builder.Register<EnemyFactory>(Lifetime.Singleton);
         builder.Register<EnemySpawner>(Lifetime.Singleton);
     }
@@ -27,6 +34,8 @@ public class Bootstrap : LifetimeScope
     private void Start()
     {
         var enemySpawner = Container.Resolve<EnemySpawner>();
+        _inputBinder.BindLMBCLick(Container.Resolve<Shooter>().AttackSoundWave);
+        _inputBinder.BindRMBCLick(Container.Resolve<Shooter>().AttackPointExplosion);
         enemySpawner.Start();
     }
 

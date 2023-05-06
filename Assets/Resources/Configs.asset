@@ -16,6 +16,12 @@ MonoBehaviour:
   _enemySpeed: 1
   _driverDamage: 10
   _driverHealth: 5
-  _spawnPositions:
-  - {x: 8.349, y: 2.783, z: 0.1458184}
+  _soundWavePrefab: {fileID: 5408364452416598573, guid: a7f67d3819740ce4e8acd83bfcbe3f50, type: 3}
+  _soundWaveSpreadingDuration: 5
+  _soundWaveScaleMultiplier: 5
+  _pointExplosionPrefab: {fileID: 323118179261435316, guid: a90da22ec986df041b1f23ed6ab2186b, type: 3}
+  _pointExplosionScaleMultiplier: 5
+  _spawns:
+  - {x: -10.033, y: -4.787, z: 0.23628876}
+  - {x: 8.349, y: 3.037, z: 0.14581835}
   _delayBetweenSpawnEnemies: 1
