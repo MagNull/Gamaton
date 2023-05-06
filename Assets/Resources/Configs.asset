@@ -31,9 +31,9 @@ MonoBehaviour:
   _pointExplosionSpreadingDuration: 1
   _pointExplosionScaleMultiplier: 2
   _spawns:
-  - {x: -10.033, y: -4.787, z: 0.23628876}
-  - {x: 8.349, y: 5, z: 0.14581835}
-  - {x: -10.033, y: 3.037, z: 0.14581835}
+  - {x: -10.033, y: -4.787, z: 0}
+  - {x: 8.349, y: 2.92, z: 0}
+  - {x: -10.033, y: 2.92, z: 0}
   _startSpawnDivers: 0.5
   _endSpawnDivers: 2
   _startSpawnSubmarines: 5
