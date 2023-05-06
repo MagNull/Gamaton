@@ -27,6 +27,7 @@ MonoBehaviour:
   _spawns:
   - {x: -10.033, y: -4.787, z: 0.23628876}
   - {x: 8.349, y: 3.037, z: 0.14581835}
+  - {x: -10.033, y: 3.037, z: 0.14581835}
   _delayBetweenSpawnDivers: 1
   _delayBetweenSpawnSubmarines: 5
   _delayBetweenSpawnShips: 10
