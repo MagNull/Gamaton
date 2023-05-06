@@ -42,12 +42,18 @@ namespace DefaultNamespace
         private List<Vector3> _spawns;
 
         [Header("GameSettings")]
+        [SerializeField] 
+        private float _startSpawnDivers = 0.5f;
         [SerializeField]
-        private float _delayBetweenSpawnDivers = 1f;
+        private float _endSpawnDivers = 2f;
         [SerializeField]
-        private float _delayBetweenSpawnSubmarines = 5f;
+        private float _startSpawnSubmarines = 5f;
         [SerializeField]
-        private float _delayBetweenSpawnShips = 10f;
+        private float _endSpawnSubmarines = 7.5f;
+        [SerializeField]
+        private float _startSpawnShips = 10f;
+        [SerializeField]
+        private float _endSpawnShips = 15f;
         
         
         public float EnemySpeed => _enemySpeed;
@@ -62,9 +68,13 @@ namespace DefaultNamespace
         public GameObject PointExplosionPrefab => _pointExplosionPrefab;
         public float PointExplosionScaleMultiplier => _pointExplosionScaleMultiplier;
         public float PointExplosionSpreadingDuration => _pointExplosionSpreadingDuration;
-        public float DelayBetweenSpawnSubmarines => _delayBetweenSpawnSubmarines;
-        public float DelayBetweenSpawnDivers => _delayBetweenSpawnDivers;
-        public float DelayBetweenSpawnShips => _delayBetweenSpawnShips;
+
+        public float StartSpawnDivers => _startSpawnDivers;
+        public float EndSpawnDivers => _endSpawnDivers;
+        public float StartSpawnSubmarines => _startSpawnSubmarines;
+        public float EndSpawnSubmarines => _endSpawnSubmarines;
+        public float StartSpawnShips => _startSpawnShips;
+        public float EndSpawnShips => _endSpawnShips;
         public Diver DiverPrefab => _diverPrefab;
         public Submarine SubmarinePrefab => _submarinePrefab;
         public Ship ShipPrefab => _shipPrefab;

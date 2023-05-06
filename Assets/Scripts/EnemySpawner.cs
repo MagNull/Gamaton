@@ -15,11 +15,11 @@ namespace DefaultNamespace
             _timers = new List<Timer>();
         }
 
-        public void InitializeTimers(Dictionary<float, EnemyType> timeTypes)
+        public void InitializeTimers(Dictionary<(float, float), EnemyType> timeTypes)
         {
             foreach (var timeType in timeTypes)
             {
-                var timer = new Timer(timeType.Key);
+                var timer = new Timer(timeType.Key.Item1, timeType.Key.Item2);
                 timer.OnEnd += () => _enemyFactory.Create(timeType.Value);
                 _timers.Add(timer);
             }

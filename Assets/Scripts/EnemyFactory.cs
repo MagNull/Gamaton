@@ -49,8 +49,8 @@ namespace DefaultNamespace
         {
             var spawnNum = Random.Range(0, 2);
             var position = spawnNum == 0 ? _configs.Spawns[1] : _configs.Spawns[2];
-            
-            return _objectResolver.Instantiate(_configs.ShipPrefab, position, Quaternion.identity);
+            var rotation = GetRotation(position);
+            return _objectResolver.Instantiate(_configs.ShipPrefab, position, rotation);
 
         }
 

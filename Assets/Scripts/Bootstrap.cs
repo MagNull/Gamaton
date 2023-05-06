@@ -33,11 +33,11 @@ public class Bootstrap : LifetimeScope
         _inputBinder.BindLMBCLick(Container.Resolve<Shooter>().AttackSoundWave);
         _inputBinder.BindRMBCLick(Container.Resolve<Shooter>().AttackPointExplosion);
         _enemySpawner = Container.Resolve<EnemySpawner>();
-        _enemySpawner.InitializeTimers(new Dictionary<float, EnemyType>
+        _enemySpawner.InitializeTimers(new Dictionary<(float, float), EnemyType>
         {
-            { _configs.DelayBetweenSpawnDivers, EnemyType.Diver },
-            { _configs.DelayBetweenSpawnShips, EnemyType.Ship },
-            { _configs.DelayBetweenSpawnSubmarines, EnemyType.Submarine }
+            { (_configs.StartSpawnDivers, _configs.EndSpawnDivers), EnemyType.Diver },
+            { (_configs.StartSpawnShips, _configs.EndSpawnShips), EnemyType.Ship },
+            { (_configs.StartSpawnSubmarines, _configs.EndSpawnSubmarines), EnemyType.Submarine }
         });
     }
 
