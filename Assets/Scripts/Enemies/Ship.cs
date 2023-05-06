@@ -20,9 +20,9 @@ namespace DefaultNamespace.Enemies
         public void Construct(City city, Configs configs)
         {
             _centerPositionX = city.transform.position.x;
-            _speed = configs.EnemySpeed;
-            _damage = configs.DriverDamage;
-            _health = configs.DriverHealth;
+            _speed = configs.ShipSpeed;
+            _damage = configs.ShipDamage;
+            _health = configs.ShipHealth;
             _endPosition = configs.Spawns.Last(x => x != transform.position);
         }
         
@@ -46,7 +46,6 @@ namespace DefaultNamespace.Enemies
 
         public void Attack()
         {
-            Debug.Log("Attack");
             OnAttack?.Invoke(_damage);
         }
     }

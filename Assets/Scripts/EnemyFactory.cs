@@ -11,24 +11,27 @@ namespace DefaultNamespace
     {
         private readonly Configs _configs;
         private readonly IObjectResolver _objectResolver;
-        private readonly Vector3 _cityPosition;
+        private readonly City _city;
         
         public EnemyFactory(Configs configs, IObjectResolver objectResolver, City city)
         {
             _configs = configs;
             _objectResolver = objectResolver;
-            _cityPosition = city.transform.position;
+            _city = city;
         }
 
         public IEnemy Create(EnemyType type)
         {
-            return type switch
+            IEnemy enemy = type switch
             {
                 EnemyType.Submarine => CreateSubmarine(),
                 EnemyType.Ship => CreateShip(),
                 EnemyType.Diver => CreateDiver(),
                 _ => throw new ArgumentException("Unknown enemy type")
             };
+
+            enemy.OnAttack += _city.TakeDamage;
+            return enemy;
         }
 
         private Diver CreateDiver()
@@ -66,7 +69,7 @@ namespace DefaultNamespace
 
         private Quaternion GetRotation(Vector3 position)
         {
-            var direction = position.x > _cityPosition.x ? new Vector3(0, 180) : Vector3.zero;
+            var direction = position.x > _city.transform.position.x ? new Vector3(0, 180) : Vector3.zero;
             return Quaternion.Euler(direction);
         }
     }

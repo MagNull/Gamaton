@@ -1,50 +1,37 @@
 using System;
-using DefaultNamespace.Enemies;
-using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class City : MonoBehaviour
+    public class City : DamageDealer
     {
-        private int _health = 100;
-        
-        public int Health => _health;
-        public event Action OnExplosion;
-        public event Action OnDamaged;
-        
-        
-        public void TakeDamage(int damage)
+        protected new int Health
         {
-            Debug.Log("Damage");
-            if (damage > _health)
+            get => base.Health;
+            set => base.Health = value;
+        }
+        
+        protected new void Awake()
+        {
+            Health = 100;
+            base.Awake();
+        }
+
+        public event Action OnExplosion;
+        
+
+        public override void TakeDamage(int damage)
+        {
+            base.TakeDamage(damage);
+            if (Health < 0)
             {
-                Collapse();
-            }
-            else
-            {
-                _health -= damage;
+                Explosion();
             }
         }
 
-        private void Collapse()
+        private void Explosion()
         {
             OnExplosion += () => Destroy(gameObject);
             OnExplosion?.Invoke();
-        }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (col.gameObject.TryGetComponent(out Diver diver))
-            {
-                TakeDamage(diver.Damage);
-                Destroy(diver.gameObject);
-            }
-            else if (col.gameObject.TryGetComponent(out Bomb bomb))
-            {
-                Debug.Log("ffff");
-                TakeDamage(bomb.Damage);
-                Destroy(bomb.gameObject);
-            }
         }
     }
 }
