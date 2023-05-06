@@ -31,11 +31,12 @@ public class SoundWave : DamageActor
     private void Start()
     {
         transform.DOScale(_scaleMultiplier, _spreadingDuration);
+        transform.Rotate(Vector3.up, -90f);
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * _scaleMultiplier));
+        transform.Translate(Vector3.right * (Time.deltaTime * _scaleMultiplier));
     }
 
 
