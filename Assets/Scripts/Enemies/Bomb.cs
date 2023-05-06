@@ -3,13 +3,21 @@ using UnityEngine;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Bomb : DamageDealer
+    public class Bomb : DamageActor
     {
-        public int Damage = 3;
+        private int _damage;
 
         private void Start()
         {
             Health = 1;
+        }
+
+        protected override int Damage => _damage;
+        private int _health;
+        protected override int Health
+        {
+            get => _health;
+            set => _health = value;
         }
 
         protected override void OnDie()

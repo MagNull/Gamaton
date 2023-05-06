@@ -44,17 +44,26 @@ namespace DefaultNamespace
         [SerializeField]
         private GameObject _soundWavePrefab;
         [SerializeField] 
-        private float _soundWaveSpreadingDuration = 5;
+        private float _soundWaveDuration = 5;
         [SerializeField] 
         private float _soundWaveScaleMultiplier = 5;
+        [SerializeField]
+        private int _soundWaveDamage;
+        [SerializeField]
+        private int _soundWaveHealth;
 
         [Header("Point Explosion")]
         [SerializeField] 
         private GameObject _pointExplosionPrefab;
         [SerializeField]
-        private float _pointExplosionSpreadingDuration = 5;
+        private float _pointExplosionDuration = 5;
         [SerializeField] 
         private float _pointExplosionScaleMultiplier = 5;
+        [SerializeField]
+        private int _pointExplosionDamage;
+        [SerializeField]
+        private int _pointExplosionHealth;
+        
         [SerializeField]
         private List<Vector3> _spawns;
 
@@ -87,11 +96,17 @@ namespace DefaultNamespace
         
         public GameObject SoundWavePrefab => _soundWavePrefab;
         public float SoundWaveScaleMultiplier => _soundWaveScaleMultiplier;
-        public float SoundWaveSpreadingDuration => _soundWaveSpreadingDuration;
+        public float SoundWaveDuration => _soundWaveDuration;
+        public int SoundWaveDamage => _soundWaveDamage;
+        public int SoundWaveHealth => _soundWaveHealth;
         
         public GameObject PointExplosionPrefab => _pointExplosionPrefab;
         public float PointExplosionScaleMultiplier => _pointExplosionScaleMultiplier;
-        public float PointExplosionSpreadingDuration => _pointExplosionSpreadingDuration;
+        public float PointExplosionDuration => _pointExplosionDuration;
+
+        public int PointExplosionDamage => _pointExplosionDamage;
+        public int PointExplosionHealth => _pointExplosionHealth;
+
 
         public float StartSpawnDivers => _startSpawnDivers;
         public float EndSpawnDivers => _endSpawnDivers;
