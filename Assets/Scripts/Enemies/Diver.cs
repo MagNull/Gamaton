@@ -11,6 +11,7 @@ namespace DefaultNamespace.Enemies
         private int _health;
         private float _speed;
         private Vector3 _endPosition;
+        public int Damage => _damage;
 
         public event Action<int> OnAttack;
         
