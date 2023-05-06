@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using DefaultNamespace.Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     [CreateAssetMenu(fileName = "Configs", menuName = "Configs", order = 0)]
     public class Configs : ScriptableObject
     {
-        [Header("Enemies")] [SerializeField]
+        [Header("Enemies")]
+        [SerializeField]
         private Diver _diverPrefab;
+        [SerializeField]
+        private Submarine _submarinePrefab;
+        [SerializeField]
+        private Ship _shipPrefab;
         
         [Header("Driver")]
         [SerializeField]
@@ -37,11 +41,15 @@ namespace DefaultNamespace
         [SerializeField]
         private List<Vector3> _spawns;
 
-        [Header("GameSettings")] [SerializeField]
-        private float _delayBetweenSpawnEnemies = 1f;
+        [Header("GameSettings")]
+        [SerializeField]
+        private float _delayBetweenSpawnDivers = 1f;
+        [SerializeField]
+        private float _delayBetweenSpawnSubmarines = 5f;
+        [SerializeField]
+        private float _delayBetweenSpawnShips = 10f;
         
-
-
+        
         public float EnemySpeed => _enemySpeed;
         
         public int DriverDamage => _driverDamage;
@@ -54,9 +62,12 @@ namespace DefaultNamespace
         public GameObject PointExplosionPrefab => _pointExplosionPrefab;
         public float PointExplosionScaleMultiplier => _pointExplosionScaleMultiplier;
         public float PointExplosionSpreadingDuration => _pointExplosionSpreadingDuration;
-        
-        public float DelayBetweenSpawnEnemies => _delayBetweenSpawnEnemies;
+        public float DelayBetweenSpawnSubmarines => _delayBetweenSpawnSubmarines;
+        public float DelayBetweenSpawnDivers => _delayBetweenSpawnDivers;
+        public float DelayBetweenSpawnShips => _delayBetweenSpawnShips;
         public Diver DiverPrefab => _diverPrefab;
+        public Submarine SubmarinePrefab => _submarinePrefab;
+        public Ship ShipPrefab => _shipPrefab;
         public IReadOnlyList<Vector3> Spawns => _spawns;
     }
 }

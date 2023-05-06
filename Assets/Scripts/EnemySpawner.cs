@@ -1,21 +1,34 @@
-﻿namespace DefaultNamespace
+﻿using System.Collections.Generic;
+
+namespace DefaultNamespace
 {
     public class EnemySpawner
     {
         private readonly EnemyFactory _enemyFactory;
         private readonly Configs _configs;
-        private readonly Updater _updater;
-        
-        public EnemySpawner(EnemyFactory enemyFactory, Configs configs, Updater updater)
+        private readonly List<Timer> _timers;
+
+        public EnemySpawner(EnemyFactory enemyFactory, Configs configs)
         {
             _enemyFactory = enemyFactory;
             _configs = configs;
-            _updater = updater;
+            _timers = new List<Timer>();
         }
 
-        public void Start()
+        public void InitializeTimers(Dictionary<float, EnemyType> timeTypes)
         {
-            _updater.OnUpdate(() => _enemyFactory.Create(EnemyType.Diver));   
+            foreach (var timeType in timeTypes)
+            {
+                var timer = new Timer(timeType.Key);
+                timer.OnEnd += () => _enemyFactory.Create(timeType.Value);
+                _timers.Add(timer);
+            }
+        }
+
+        public void Tick(float deltaTime)
+        {
+            foreach(var timer in _timers)
+                timer.Tick(deltaTime);
         }
     }
 }
