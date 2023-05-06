@@ -52,7 +52,10 @@ namespace DefaultNamespace.Enemies
 
         private void OnDie()
         {
-            Destroy(gameObject);
+            Debug.Log("Diver die");
+            GetComponent<Animator>().SetBool("Die", true);
         }
+
+        public void Destroy() => Destroy(gameObject);
     }
 }
