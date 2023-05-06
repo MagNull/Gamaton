@@ -25,7 +25,7 @@ namespace DefaultNamespace
             return type switch
             {
                 EnemyType.Submarine => CreateSubmarine(),
-                EnemyType.Ship => throw new NotImplementedException("Ship enemy not implemented"),
+                EnemyType.Ship => CreateShip(),
                 EnemyType.Diver => CreateDiver(),
                 _ => throw new ArgumentException("Unknown enemy type")
             };
@@ -43,6 +43,15 @@ namespace DefaultNamespace
             var position = GetRandomPosition();
             var rotation = GetRotation(position);
             return _objectResolver.Instantiate(_configs.SubmarinePrefab, position, rotation);
+        }
+        
+        private Ship CreateShip()
+        {
+            var spawnNum = Random.Range(0, 2);
+            var position = spawnNum == 0 ? _configs.Spawns[1] : _configs.Spawns[2];
+            
+            return _objectResolver.Instantiate(_configs.ShipPrefab, position, Quaternion.identity);
+
         }
 
         private Vector3 GetRandomPosition()

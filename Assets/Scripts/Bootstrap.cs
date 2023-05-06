@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using VContainer;
@@ -28,7 +27,7 @@ public class Bootstrap : LifetimeScope
         _enemySpawner.InitializeTimers(new Dictionary<float, EnemyType>
         {
             { _configs.DelayBetweenSpawnDivers, EnemyType.Diver },
-            //{ _configs.DelayBetweenSpawnDivers, EnemyType.Ship },
+            { _configs.DelayBetweenSpawnShips, EnemyType.Ship },
             { _configs.DelayBetweenSpawnSubmarines, EnemyType.Submarine }
         });
     }

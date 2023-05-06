@@ -12,6 +12,8 @@ namespace DefaultNamespace
         private Diver _diverPrefab;
         [SerializeField]
         private Submarine _submarinePrefab;
+        [SerializeField]
+        private Ship _shipPrefab;
         
         [Header("Driver")]
         [SerializeField]
@@ -38,9 +40,10 @@ namespace DefaultNamespace
         private float _delayBetweenSpawnDivers = 1f;
         [SerializeField]
         private float _delayBetweenSpawnSubmarines = 5f;
+        [SerializeField]
+        private float _delayBetweenSpawnShips = 10f;
         
-
-
+        
         public float EnemySpeed => _enemySpeed;
         public int DriverDamage => _driverDamage;
         public int DriverHealth => _driverHealth;
@@ -50,8 +53,10 @@ namespace DefaultNamespace
         public float PointExplosionSpreadingDuration => _pointExplosionSpreadingDuration;
         public float DelayBetweenSpawnDivers => _delayBetweenSpawnDivers;
         public float DelayBetweenSpawnSubmarines => _delayBetweenSpawnSubmarines;
+        public float DelayBetweenSpawnShips => _delayBetweenSpawnShips;
         public Diver DiverPrefab => _diverPrefab;
         public Submarine SubmarinePrefab => _submarinePrefab;
+        public Ship ShipPrefab => _shipPrefab;
         public IReadOnlyList<Vector3> Spawns => _spawns;
     }
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _diverPrefab: {fileID: 3542328161098592730, guid: 52ce9d811fb2642f8a5b5856deae736a, type: 3}
   _submarinePrefab: {fileID: 2805873637284934059, guid: 20f76f39cc9d34079b67c6a38122f535, type: 3}
+  _shipPrefab: {fileID: 473504640586642286, guid: bb3dc38a0f5c6405e8c78afea3e09a91, type: 3}
   _enemySpeed: 1
   _driverDamage: 10
   _driverHealth: 5
@@ -24,4 +25,7 @@ MonoBehaviour:
   _spawns:
   - {x: -10.033, y: -4.787, z: 0.2362888}
   - {x: 8.349, y: 3.037, z: 0.1458184}
-  _delayBetweenSpawnEnemies: 1
+  - {x: -10.036, y: 3.059, z: 0.13592467}
+  _delayBetweenSpawnDivers: 1
+  _delayBetweenSpawnSubmarines: 5
+  _delayBetweenSpawnShips: 10
