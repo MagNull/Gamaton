@@ -1,4 +1,6 @@
-﻿using DefaultNamespace;
+﻿using System;
+using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,33 +12,29 @@ public class Bootstrap : LifetimeScope
     [SerializeField] 
     private City _city;
 
-    private Updater _updater;
-    private float _timer = 0f;
+    private EnemySpawner _enemySpawner;
     
     protected override void Configure(IContainerBuilder builder)
     {
-        _updater = new Updater();
-        
         builder.RegisterComponent(_city);
         builder.RegisterComponent(_configs);
-        builder.RegisterComponent(_updater);
         builder.Register<EnemyFactory>(Lifetime.Singleton);
         builder.Register<EnemySpawner>(Lifetime.Singleton);
     }
     
     private void Start()
     {
-        var enemySpawner = Container.Resolve<EnemySpawner>();
-        enemySpawner.Start();
+        _enemySpawner = Container.Resolve<EnemySpawner>();
+        _enemySpawner.InitializeTimers(new Dictionary<float, EnemyType>
+        {
+            { _configs.DelayBetweenSpawnDivers, EnemyType.Diver },
+            //{ _configs.DelayBetweenSpawnDivers, EnemyType.Ship },
+            { _configs.DelayBetweenSpawnSubmarines, EnemyType.Submarine }
+        });
     }
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer < _configs.DelayBetweenSpawnEnemies)
-            return;
-        
-        _updater.Update();
-        _timer = 0;
+        _enemySpawner.Tick(Time.deltaTime);
     }
 }

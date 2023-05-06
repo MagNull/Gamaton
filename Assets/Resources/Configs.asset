@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: Configs
   m_EditorClassIdentifier: 
   _diverPrefab: {fileID: 3542328161098592730, guid: 52ce9d811fb2642f8a5b5856deae736a, type: 3}
+  _submarinePrefab: {fileID: 2805873637284934059, guid: 20f76f39cc9d34079b67c6a38122f535, type: 3}
   _enemySpeed: 1
   _driverDamage: 10
   _driverHealth: 5
-  _spawnPositions:
-  - {x: 8.349, y: 2.783, z: 0.1458184}
+  _soundWaveSpreadingDuration: 5
+  _soundWaveScaleMultiplier: 5
+  _pointExplosionSpreadingDuration: 5
+  _pointExplosionScaleMultiplier: 5
+  _spawns:
+  - {x: -10.033, y: -4.787, z: 0.2362888}
+  - {x: 8.349, y: 3.037, z: 0.1458184}
   _delayBetweenSpawnEnemies: 1

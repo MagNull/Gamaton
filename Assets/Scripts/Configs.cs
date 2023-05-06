@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using DefaultNamespace.Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     [CreateAssetMenu(fileName = "Configs", menuName = "Configs", order = 0)]
     public class Configs : ScriptableObject
     {
-        [Header("Enemies")] [SerializeField]
+        [Header("Enemies")]
+        [SerializeField]
         private Diver _diverPrefab;
+        [SerializeField]
+        private Submarine _submarinePrefab;
         
         [Header("Driver")]
         [SerializeField]
@@ -31,8 +33,11 @@ namespace DefaultNamespace
         [SerializeField]
         private List<Vector3> _spawns;
 
-        [Header("GameSettings")] [SerializeField]
-        private float _delayBetweenSpawnEnemies = 1f;
+        [Header("GameSettings")]
+        [SerializeField]
+        private float _delayBetweenSpawnDivers = 1f;
+        [SerializeField]
+        private float _delayBetweenSpawnSubmarines = 5f;
         
 
 
@@ -43,8 +48,10 @@ namespace DefaultNamespace
         public float SoundWaveSpreadingDuration => _soundWaveSpreadingDuration;
         public float PointExplosionScaleMultiplier => _pointExplosionScaleMultiplier;
         public float PointExplosionSpreadingDuration => _pointExplosionSpreadingDuration;
-        public float DelayBetweenSpawnEnemies => _delayBetweenSpawnEnemies;
+        public float DelayBetweenSpawnDivers => _delayBetweenSpawnDivers;
+        public float DelayBetweenSpawnSubmarines => _delayBetweenSpawnSubmarines;
         public Diver DiverPrefab => _diverPrefab;
+        public Submarine SubmarinePrefab => _submarinePrefab;
         public IReadOnlyList<Vector3> Spawns => _spawns;
     }
 }
