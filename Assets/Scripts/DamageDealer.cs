@@ -18,14 +18,14 @@ namespace DefaultNamespace
         public virtual void TakeDamage(int damage)
         {
             Health -= damage;
-            PlayDamagedAnimation();
+            PlayDamagedAnimation(damage);
         }
         
-        private void PlayDamagedAnimation()
+        private void PlayDamagedAnimation(int damage)
         {
             var color = _spriteRenderer.color;
             var sequence = DOTween.Sequence();
-            sequence.Append(_spriteRenderer.DOColor(Color.red, Duration));
+            sequence.Append(_spriteRenderer.DOColor(new Color(255 * damage / 100f, 0, 0), Duration));
             sequence.Append(_spriteRenderer.DOColor(color, Duration));
         }
     }
