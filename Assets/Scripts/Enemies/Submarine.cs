@@ -4,7 +4,7 @@ using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Submarine : MonoBehaviour, IEnemy
+    public class Submarine : MonoBehaviour
     {
         private float _speed; 
         private int _damage;

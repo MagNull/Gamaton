@@ -17,7 +17,7 @@ MonoBehaviour:
   _shipPrefab: {fileID: 473504640586642286, guid: bb3dc38a0f5c6405e8c78afea3e09a91, type: 3}
   _driverSpeed: 1
   _driverDamage: 10
-  _driverHealth: 5
+  _driverHealth: 1
   _shipSpeed: 1
   _shipDamage: 10
   _shipHealth: 5
@@ -38,5 +38,5 @@ MonoBehaviour:
   _endSpawnDivers: 2
   _startSpawnSubmarines: 5
   _endSpawnSubmarines: 7.5
-  _startSpawnShips: 10
-  _endSpawnShips: 15
+  _startSpawnShips: 1
+  _endSpawnShips: 3

@@ -1,9 +1,15 @@
 using System;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
     public class City : DamageDealer
     {
+        [SerializeField]
+        private int _damage = 1;
+
+        public override int Damage => _damage;
+
         protected new int Health
         {
             get => base.Health;
@@ -17,15 +23,10 @@ namespace DefaultNamespace
         }
 
         public event Action OnExplosion;
-        
 
-        public override void TakeDamage(int damage)
+        protected override void OnDie()
         {
-            base.TakeDamage(damage);
-            if (Health < 0)
-            {
-                Explosion();
-            }
+            Explosion();
         }
 
         private void Explosion()
