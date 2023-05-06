@@ -5,8 +5,17 @@ namespace DefaultNamespace
     [CreateAssetMenu(fileName = "Configs", menuName = "Configs", order = 0)]
     public class Configs : ScriptableObject
     {
-        [Header("Enemy")] 
+        [Header("Enemies")]
+        [SerializeField]
+        private float _enemySpeed = 1f;
+        [SerializeField]
+        private int _driverDamage = 10;
         [SerializeField] 
-        private Vector3 _cityPosition;
+        private int _driverHealth = 5;
+
+
+        public float EnemySpeed => _enemySpeed;
+        public int DriverDamage => _driverDamage;
+        public int DriverHealth => _driverHealth;
     }
 }
