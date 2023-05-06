@@ -153,3 +153,7 @@ sysinfo.txt
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,rider
+.idea/.idea.TipaKrut/.idea/.gitignore
+.idea/.idea.TipaKrut/.idea/encodings.xml
+.idea/.idea.TipaKrut/.idea/indexLayout.xml
+.idea/.idea.TipaKrut/.idea/vcs.xml
