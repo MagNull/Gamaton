@@ -1,35 +1,53 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer;
+using VContainer.Unity;
 
 namespace DefaultNamespace
 {
     public class Shooter
     {
         private City _city;
+        private IObjectResolver _resolver;
         private GameObject _soundWavePrefab;
         private GameObject _pointExplosionPrefab;
 
-        [Inject]
-        public void Construct(City city, Configs configs)
+        public Shooter(City city, Configs configs)
         {
             _city = city;
+            _soundWavePrefab = configs.SoundWavePrefab;
+            _pointExplosionPrefab = configs.PointExplosionPrefab;
+        }
+        
+        [Inject]
+        public void Construct(IObjectResolver resolver)
+        {
+            _resolver = resolver;
         }
 
         public void AttackSoundWave()
         {
-            var mousePos = UnityEngine.Input.mousePosition;
-            var mouseWorldPos = Camera.current.ScreenToWorldPoint(mousePos);
-            var cityPos = _city.transform.position;
-            var soundWave = Object.Instantiate(_soundWavePrefab, cityPos, Quaternion.identity);
-            var targetPos = mouseWorldPos - cityPos;
-            soundWave.transform.right = targetPos;
+            var soundWave = _resolver.Instantiate(_soundWavePrefab, _city.transform.position, Quaternion.identity);
+            
+            var mouseWorldPos = GetMousePosition();
+
+            soundWave.transform.LookAt(mouseWorldPos);
         }
-        
+
+        private Vector3 GetMousePosition()
+        {
+            var mousePos = Mouse.current.position.ReadValue();
+            var plane = new Plane(Vector3.forward, _city.transform.position);
+            var ray = Camera.main.ScreenPointToRay(mousePos);
+            plane.Raycast(ray, out var enter);
+            var mouseWorldPos = ray.GetPoint(enter);
+            return mouseWorldPos;
+        }
+
         public void AttackPointExplosion()
         {
-            var mousePos = UnityEngine.Input.mousePosition;
-            var mouseWorldPos = Camera.current.ScreenToWorldPoint(mousePos);
-            Object.Instantiate(_pointExplosionPrefab, mouseWorldPos, Quaternion.identity);
+            var mouseWorldPos = GetMousePosition();
+            _resolver.Instantiate(_pointExplosionPrefab, mouseWorldPos, Quaternion.identity);
         }
     }
 }

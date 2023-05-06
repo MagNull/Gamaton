@@ -15,9 +15,10 @@ public class PointExplosion : MonoBehaviour
         _spreadingDuration = configs.PointExplosionSpreadingDuration;
     }
 
-    private void Awake()
+    private void Start()
     {
         transform.DOScale(_scaleMultiplier, _spreadingDuration)
-            .OnComplete(() => Destroy(gameObject, _spreadingDuration));
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() => Destroy(gameObject));
     }
 }

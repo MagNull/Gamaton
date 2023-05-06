@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using VContainer;
@@ -10,6 +10,8 @@ public class Bootstrap : LifetimeScope
     private Configs _configs;
     [SerializeField] 
     private City _city;
+    [SerializeField]
+    private InputBinder _inputBinder;
 
     private EnemySpawner _enemySpawner;
     
@@ -17,12 +19,19 @@ public class Bootstrap : LifetimeScope
     {
         builder.RegisterComponent(_city);
         builder.RegisterComponent(_configs);
+        builder.RegisterComponent(_inputBinder);
+
+        var shooter = new Shooter(_city, _configs);
+        builder.RegisterComponent(shooter);
+
         builder.Register<EnemyFactory>(Lifetime.Singleton);
         builder.Register<EnemySpawner>(Lifetime.Singleton);
     }
     
     private void Start()
     {
+        _inputBinder.BindLMBCLick(Container.Resolve<Shooter>().AttackSoundWave);
+        _inputBinder.BindRMBCLick(Container.Resolve<Shooter>().AttackPointExplosion);
         _enemySpawner = Container.Resolve<EnemySpawner>();
         _enemySpawner.InitializeTimers(new Dictionary<float, EnemyType>
         {
