@@ -38,9 +38,8 @@ namespace DefaultNamespace.Enemies
             var distance = Vector3.Distance(center, position);
 
             var sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMove(center, distance / _speed));
-            sequence.onStepComplete += Attack;
-            sequence.Append(transform.DOMove(_endPosition, distance / _speed));
+            sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad).OnComplete(Attack));
+            sequence.Append(transform.DOMove(_endPosition, distance / _speed).SetEase(Ease.InQuad));
             sequence.OnComplete(() => Destroy(gameObject));
             sequence.Play();
         }
