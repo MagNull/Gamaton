@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 951b443935094929896d21c0647e62ac, type: 3}
   m_Name: Configs
   m_EditorClassIdentifier: 
-  _diverPrefab: {fileID: 0}
-  _submarinePrefab: {fileID: 0}
-  _shipPrefab: {fileID: 0}
+  _diverPrefab: {fileID: 3542328161098592730, guid: 52ce9d811fb2642f8a5b5856deae736a, type: 3}
+  _submarinePrefab: {fileID: 2805873637284934059, guid: 20f76f39cc9d34079b67c6a38122f535, type: 3}
+  _shipPrefab: {fileID: 473504640586642286, guid: bb3dc38a0f5c6405e8c78afea3e09a91, type: 3}
   _enemySpeed: 1
   _driverDamage: 10
   _driverHealth: 5
-  _soundWavePrefab: {fileID: 0}
+  _soundWavePrefab: {fileID: 5408364452416598573, guid: a7f67d3819740ce4e8acd83bfcbe3f50, type: 3}
   _soundWaveSpreadingDuration: 5
   _soundWaveScaleMultiplier: 5
-  _pointExplosionPrefab: {fileID: 0}
+  _pointExplosionPrefab: {fileID: 323118179261435316, guid: a90da22ec986df041b1f23ed6ab2186b, type: 3}
   _pointExplosionSpreadingDuration: 5
   _pointExplosionScaleMultiplier: 5
-  _spawns: []
+  _spawns:
+  - {x: -10.033, y: -4.787, z: 0.23628876}
+  - {x: 8.349, y: 3.037, z: 0.14581835}
   _delayBetweenSpawnDivers: 1
   _delayBetweenSpawnSubmarines: 5
   _delayBetweenSpawnShips: 10
