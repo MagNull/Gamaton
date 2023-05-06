@@ -17,7 +17,7 @@ MonoBehaviour:
   _shipPrefab: {fileID: 473504640586642286, guid: bb3dc38a0f5c6405e8c78afea3e09a91, type: 3}
   _driverSpeed: 1
   _driverDamage: 10
-  _driverHealth: 5
+  _driverHealth: 1
   _shipSpeed: 1
   _shipDamage: 10
   _shipHealth: 5
@@ -28,8 +28,8 @@ MonoBehaviour:
   _soundWaveSpreadingDuration: 5
   _soundWaveScaleMultiplier: 5
   _pointExplosionPrefab: {fileID: 323118179261435316, guid: a90da22ec986df041b1f23ed6ab2186b, type: 3}
-  _pointExplosionSpreadingDuration: 5
-  _pointExplosionScaleMultiplier: 5
+  _pointExplosionSpreadingDuration: 1
+  _pointExplosionScaleMultiplier: 2
   _spawns:
   - {x: -10.033, y: -4.787, z: 0.23628876}
   - {x: 8.349, y: 5, z: 0.14581835}
@@ -38,5 +38,5 @@ MonoBehaviour:
   _endSpawnDivers: 2
   _startSpawnSubmarines: 5
   _endSpawnSubmarines: 7.5
-  _startSpawnShips: 10
-  _endSpawnShips: 15
+  _startSpawnShips: 1
+  _endSpawnShips: 3

@@ -6,8 +6,10 @@ using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Ship : MonoBehaviour, IEnemy
+    public class Ship : MonoBehaviour
     {
+        [SerializeField]
+        private Bomb _bomb;
         private int _damage;
         private int _health;
         private float _speed;
@@ -38,15 +40,16 @@ namespace DefaultNamespace.Enemies
             var distance = Vector3.Distance(center, position);
 
             var sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad).OnComplete(Attack));
+            sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad)
+                .OnComplete(Attack));
             sequence.Append(transform.DOMove(_endPosition, distance / _speed).SetEase(Ease.InQuad));
             sequence.OnComplete(() => Destroy(gameObject));
             sequence.Play();
         }
 
-        public void Attack()
+        private void Attack()
         {
-            OnAttack?.Invoke(_damage);
+            Instantiate(_bomb, transform.position, Quaternion.identity);
         }
     }
 }

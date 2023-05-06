@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace DefaultNamespace
         private const float Duration = 0.1f;
         
         protected SpriteRenderer _spriteRenderer;
+        
+        public virtual int Damage { get; }
         protected int Health { get; set; }
 
         protected void Awake()
@@ -15,11 +18,28 @@ namespace DefaultNamespace
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public virtual void TakeDamage(int damage)
+        private void OnTriggerEnter2D(Collider2D col)
         {
+            if (col.TryGetComponent(out DamageDealer dd))
+            {
+                dd.TakeDamage(Damage);
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if(Health <= 0)
+                return;
+            
             Health -= damage;
             PlayDamagedAnimation();
+            if (Health <= 0)
+            {
+                OnDie();
+            }
         }
+
+        protected abstract void OnDie();    
         
         private void PlayDamagedAnimation()
         {

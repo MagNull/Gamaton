@@ -20,17 +20,16 @@ namespace DefaultNamespace
             _city = city;
         }
 
-        public IEnemy Create(EnemyType type)
+        public GameObject Create(EnemyType type)
         {
-            IEnemy enemy = type switch
+            GameObject enemy = type switch
             {
-                EnemyType.Submarine => CreateSubmarine(),
-                EnemyType.Ship => CreateShip(),
-                EnemyType.Diver => CreateDiver(),
+                EnemyType.Submarine => CreateSubmarine().gameObject,
+                EnemyType.Ship => CreateShip().gameObject,
+                EnemyType.Diver => CreateDiver().gameObject,
                 _ => throw new ArgumentException("Unknown enemy type")
             };
 
-            enemy.OnAttack += _city.TakeDamage;
             return enemy;
         }
 
