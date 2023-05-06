@@ -24,12 +24,12 @@ namespace DefaultNamespace
 
         public void BindLMBCLick(Action action)
         {
-            _input.Player.Attack.performed += _ => action.Invoke();
+            _input.Player.SoundWave.performed += _ => action.Invoke();
         }
 
         public void BindRMBCLick(Action action)
         {
-            _input.Player.Ultimate.performed += _ => action.Invoke();
+            _input.Player.Explosion.performed += _ => action.Invoke();
         }
     }
 }

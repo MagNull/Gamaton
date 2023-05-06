@@ -6,7 +6,7 @@
             "id": "53c4293d-e03f-44d4-8370-c7c6ce46263c",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "SoundWave",
                     "type": "Button",
                     "id": "9aeafc88-0483-4389-b239-26d569494742",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ultimate",
+                    "name": "Explosion",
                     "type": "Button",
                     "id": "694d9f83-1b10-41ae-b928-0948c01b7282",
                     "expectedControlType": "Button",
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "SoundWave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Ultimate",
+                    "action": "Explosion",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
