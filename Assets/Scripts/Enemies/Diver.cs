@@ -5,14 +5,20 @@ using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Diver : DamageDealer
+    public class Diver : DamageActor
     {
         private int _damage;
         private float _speed;
         private Vector3 _endPosition;
         private Action<int> _onAttack;
-        public override int Damage => _damage;
-        
+        protected override int Damage => _damage;
+        private int _health;
+        protected override int Health
+        {
+            get => _health;
+            set => _health = value;
+        }
+
         [Inject]
         public void Construct(City city, Configs configs)
         {

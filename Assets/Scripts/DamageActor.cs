@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public abstract class DamageDealer : MonoBehaviour
+    public abstract class DamageActor : MonoBehaviour
     {
         private const float Duration = 0.1f;
         
         protected SpriteRenderer _spriteRenderer;
         
-        public virtual int Damage { get; }
-        protected int Health { get; set; }
+        protected abstract int Damage { get; }
+        protected abstract int Health { get; set; }
 
         protected void Awake()
         {
@@ -20,7 +20,7 @@ namespace DefaultNamespace
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.TryGetComponent(out DamageDealer dd))
+            if (col.TryGetComponent(out DamageActor dd))
             {
                 dd.TakeDamage(Damage);
             }

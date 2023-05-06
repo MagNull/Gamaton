@@ -3,17 +3,18 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class City : DamageDealer
+    public class City : DamageActor
     {
         [SerializeField]
         private int _damage = 1;
 
-        public override int Damage => _damage;
+        protected override int Damage => _damage;
 
-        protected new int Health
+        private int _health;
+        protected override int Health
         {
-            get => base.Health;
-            set => base.Health = value;
+            get => _health;
+            set => _health = value;
         }
         
         protected new void Awake()
