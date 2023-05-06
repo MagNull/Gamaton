@@ -5,10 +5,9 @@ using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Diver : MonoBehaviour, IEnemy
+    public class Diver : DamageDealer, IEnemy
     {
         private int _damage;
-        private int _health;
         private float _speed;
         private Vector3 _endPosition;
         private Action<int> _onAttack;
@@ -22,7 +21,7 @@ namespace DefaultNamespace.Enemies
             _endPosition = city.transform.position;
             _speed = configs.DriverSpeed;
             _damage = configs.DriverDamage;
-            _health = configs.DriverHealth;
+             Health = configs.DriverHealth;
         }
 
         private void Start()
@@ -38,7 +37,6 @@ namespace DefaultNamespace.Enemies
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("OnCollisionEnter");
             if (col.gameObject.TryGetComponent(out City city))
             {
                 Attack();

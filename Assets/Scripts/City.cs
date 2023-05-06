@@ -1,31 +1,30 @@
 using System;
-using DefaultNamespace.Enemies;
-using DG.Tweening;
-using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class City : MonoBehaviour
+    public class City : DamageDealer
     {
-        [SerializeField] 
-        private SpriteRenderer _spriteRenderer;
+        protected new int Health
+        {
+            get => base.Health;
+            set => base.Health = value;
+        }
         
-        private int _health = 100;
-        private const float Duration = 0.1f;
-        
+        protected new void Awake()
+        {
+            Health = 100;
+            base.Awake();
+        }
+
         public event Action OnExplosion;
         
-        public void TakeDamage(int damage)
+
+        public override void TakeDamage(int damage)
         {
-            Debug.Log("Damage");
-            PlayDamagedAnimation();
-            if (damage >= _health)
+            base.TakeDamage(damage);
+            if (Health < 0)
             {
                 Explosion();
-            }
-            else
-            {
-                _health -= damage;
             }
         }
 
@@ -33,14 +32,6 @@ namespace DefaultNamespace
         {
             OnExplosion += () => Destroy(gameObject);
             OnExplosion?.Invoke();
-        }
-        
-        private void PlayDamagedAnimation()
-        {
-            var color = _spriteRenderer.color;
-            var sequence = DOTween.Sequence();
-            sequence.Append(_spriteRenderer.DOColor(Color.red, Duration));
-            sequence.Append(_spriteRenderer.DOColor(color, Duration));
         }
     }
 }
