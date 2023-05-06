@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DefaultNamespace.Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
@@ -17,11 +18,27 @@ namespace DefaultNamespace
         
         [Header("Driver")]
         [SerializeField]
-        private float _enemySpeed = 1f;
+        private float _driverSpeed = 1f;
         [SerializeField]
         private int _driverDamage = 10;
         [SerializeField] 
         private int _driverHealth = 5;
+
+        [Header("Ship")] 
+        [SerializeField] 
+        private float _shipSpeed = 1f;
+        [SerializeField]
+        private int _shipDamage = 10;
+        [SerializeField]
+        private int _shipHealth = 5;
+        
+        [Header("Submarine")]
+        [SerializeField]
+        private float _submarineSpeed = 1f;
+        [SerializeField]
+        private int _submarineDamage = 10;
+        [SerializeField]
+        private int _submarineHealth = 5;
         
         [Header("Sound Wave")]
         [SerializeField]
@@ -56,10 +73,17 @@ namespace DefaultNamespace
         private float _endSpawnShips = 15f;
         
         
-        public float EnemySpeed => _enemySpeed;
-        
+        public float DriverSpeed => _driverSpeed;
+        public float ShipSpeed => _shipSpeed;
+        public float SubmarineSpeed => _submarineSpeed;
+
         public int DriverDamage => _driverDamage;
+        public int ShipDamage => _shipDamage;
+        public int SubmarineDamage => _submarineDamage;
+        
         public int DriverHealth => _driverHealth;
+        public int ShipHealth => _shipHealth;
+        public int SubmarineHealth => _submarineHealth;
         
         public GameObject SoundWavePrefab => _soundWavePrefab;
         public float SoundWaveScaleMultiplier => _soundWaveScaleMultiplier;

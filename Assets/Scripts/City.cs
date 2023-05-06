@@ -1,24 +1,27 @@
 using System;
 using DefaultNamespace.Enemies;
+using DG.Tweening;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
     public class City : MonoBehaviour
     {
+        [SerializeField] 
+        private SpriteRenderer _spriteRenderer;
+        
         private int _health = 100;
+        private const float Duration = 0.1f;
         
-        public int Health => _health;
         public event Action OnExplosion;
-        public event Action OnDamaged;
-        
         
         public void TakeDamage(int damage)
         {
             Debug.Log("Damage");
-            if (damage > _health)
+            PlayDamagedAnimation();
+            if (damage >= _health)
             {
-                Collapse();
+                Explosion();
             }
             else
             {
@@ -26,25 +29,18 @@ namespace DefaultNamespace
             }
         }
 
-        private void Collapse()
+        private void Explosion()
         {
             OnExplosion += () => Destroy(gameObject);
             OnExplosion?.Invoke();
         }
-
-        private void OnTriggerEnter2D(Collider2D col)
+        
+        private void PlayDamagedAnimation()
         {
-            if (col.gameObject.TryGetComponent(out Diver diver))
-            {
-                TakeDamage(diver.Damage);
-                Destroy(diver.gameObject);
-            }
-            else if (col.gameObject.TryGetComponent(out Bomb bomb))
-            {
-                Debug.Log("ffff");
-                TakeDamage(bomb.Damage);
-                Destroy(bomb.gameObject);
-            }
+            var color = _spriteRenderer.color;
+            var sequence = DOTween.Sequence();
+            sequence.Append(_spriteRenderer.DOColor(Color.red, Duration));
+            sequence.Append(_spriteRenderer.DOColor(color, Duration));
         }
     }
 }

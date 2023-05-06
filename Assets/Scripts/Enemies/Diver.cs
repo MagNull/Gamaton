@@ -11,19 +11,20 @@ namespace DefaultNamespace.Enemies
         private int _health;
         private float _speed;
         private Vector3 _endPosition;
+        private Action<int> _onAttack;
         public int Damage => _damage;
 
         public event Action<int> OnAttack;
-        
+
         [Inject]
         public void Construct(City city, Configs configs)
         {
             _endPosition = city.transform.position;
-            _speed = configs.EnemySpeed;
+            _speed = configs.DriverSpeed;
             _damage = configs.DriverDamage;
             _health = configs.DriverHealth;
         }
-        
+
         private void Start()
         {
             Move();
@@ -35,9 +36,25 @@ namespace DefaultNamespace.Enemies
             transform.DOMove(_endPosition, distance / _speed);
         }
 
-        public void Attack()
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            Debug.Log("OnCollisionEnter");
+            if (col.gameObject.TryGetComponent(out City city))
+            {
+                Attack();
+            }
+        }
+
+        private void Attack()
         {
             OnAttack?.Invoke(_damage);
+            OnDie();
+        }
+        
+
+        private void OnDie()
+        {
+            Destroy(gameObject);
         }
     }
 }
