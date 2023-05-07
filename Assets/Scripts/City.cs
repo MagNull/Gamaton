@@ -16,6 +16,7 @@ namespace DefaultNamespace
         private ProgressBar _bar;
         protected override int Damage => _damage;
 
+        [SerializeField]
         private int _health;
         protected override int Health
         {
@@ -25,7 +26,6 @@ namespace DefaultNamespace
         
         protected new void Awake()
         {
-            Health = 100;
             base.Awake();
             OnExplosion.AddListener( () => _renderer.sprite = _explosed);
             OnExplosion.AddListener(() => _renderer.color = Color.white);

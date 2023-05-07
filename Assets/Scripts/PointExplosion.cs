@@ -31,9 +31,9 @@ public class PointExplosion : DamageActor
     {
         transform.localScale = Vector3.zero;
         transform.DOScale(_scaleMultiplier, _spreadingDuration)
-            .SetEase(Ease.Flash)
+            .SetEase(Ease.OutQuad)
             .OnComplete(() =>  transform.DOScale(0, _spreadingDuration)
-                .SetEase(Ease.Flash).OnComplete(() => Destroy(gameObject)));
+                .SetEase(Ease.InQuad).OnComplete(() => Destroy(gameObject)));
     }
 
     public override void Die()
