@@ -6,7 +6,7 @@ using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Ship : MonoBehaviour
+    public class Ship : DamageActor
     {
         [SerializeField]
         private Bomb _bomb;
@@ -15,9 +15,15 @@ namespace DefaultNamespace.Enemies
         private float _speed;
         private float _centerPositionX;
         private Vector3 _endPosition;
-
-        public event Action<int> OnAttack;
+        private Sequence _sequence;
         
+        protected override int Damage => _damage;
+        protected override int Health 
+        {
+            get => _health;
+            set => _health = value;
+        }
+
         [Inject]
         public void Construct(City city, Configs configs)
         {
@@ -39,17 +45,24 @@ namespace DefaultNamespace.Enemies
             var center = new Vector2(_centerPositionX, position.y);
             var distance = Vector3.Distance(center, position);
 
-            var sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad)
+            _sequence = DOTween.Sequence();
+            _sequence.Append(transform.DOMove(center, distance / _speed).SetEase(Ease.OutQuad)
                 .OnComplete(Attack));
-            sequence.Append(transform.DOMove(_endPosition, distance / _speed).SetEase(Ease.InQuad));
-            sequence.OnComplete(() => Destroy(gameObject));
-            sequence.Play();
+            _sequence.Append(transform.DOMove(_endPosition, distance / _speed).SetEase(Ease.InQuad));
+            _sequence.OnComplete(() => Destroy(gameObject));
+            _sequence.Play();
         }
 
         private void Attack()
         {
             Instantiate(_bomb, transform.position, Quaternion.identity);
+        }
+
+        protected override void OnDie()
+        {
+            if(_sequence is not null && _sequence.IsActive())
+                _sequence.Kill();
+            Destroy(gameObject);
         }
     }
 }

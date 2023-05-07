@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8624195611677090054}
   - component: {fileID: 4847517786940115863}
   - component: {fileID: -4903929295034883476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Diver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
