@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DefaultNamespace
 {
@@ -7,7 +8,12 @@ namespace DefaultNamespace
     {
         [SerializeField]
         private int _damage = 1;
-
+        [SerializeField]
+        private SpriteRenderer _renderer;
+        [SerializeField]
+        private Sprite _explosed;
+        [SerializeField]
+        private ProgressBar _bar;
         protected override int Damage => _damage;
 
         private int _health;
@@ -21,9 +27,15 @@ namespace DefaultNamespace
         {
             Health = 100;
             base.Awake();
+            OnExplosion.AddListener( () => _renderer.sprite = _explosed);
+            OnExplosion.AddListener(() => _renderer.color = Color.white);
+            OnExplosion.AddListener(() => Time.timeScale = 0);
+            _bar._startHealth = Health;
+            _bar._health = Health;
+            OnDamage += x => _bar.SetProperty(x);
         }
 
-        public event Action OnExplosion;
+        public UnityEvent OnExplosion;
 
         public override void Die()
         {
@@ -32,7 +44,6 @@ namespace DefaultNamespace
 
         private void Explosion()
         {
-            OnExplosion += () => Destroy(gameObject);
             OnExplosion?.Invoke();
         }
     }
