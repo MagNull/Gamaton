@@ -38,9 +38,9 @@ namespace DefaultNamespace.Enemies
             var distance = Vector3.Distance(_endPosition, transform.position);
             transform.DOMove(_endPosition, distance / _speed);
         }
-        
 
-        protected override void OnDie()
+
+        public override void Die()
         {
             Debug.Log("Diver die");
             GetComponent<Animator>().SetBool("Die", true);

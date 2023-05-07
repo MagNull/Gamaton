@@ -1,32 +1,59 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace DefaultNamespace.Enemies
 {
-    public class Submarine : MonoBehaviour
+    public class Submarine : DamageActor
     {
-        private float _speed; 
+        [SerializeField] private Torpedo _torpedo;
         private int _damage;
+        protected override int Damage => _damage;
         private int _health;
-        public event Action<int> OnAttack;
-        
-        [Inject]
-        public void Construct(City city, Configs configs)
+        protected override int Health
         {
-            _speed = configs.SubmarineSpeed;
+            get => _health;
+            set => _health = value;
+        }
+        private Vector3 _cityPos;
+        private IObjectResolver _resolver;
+
+        [Inject]
+        public void Construct(Configs configs, City city, IObjectResolver resolver)
+        {
             _damage = configs.SubmarineDamage;
             _health = configs.SubmarineHealth;
+            // TODO: Прокинуть duration
+            
+            _cityPos = city.transform.position;
+            
+            _resolver = resolver;
         }
-        
-        public void Move()
+
+        private void Start()
         {
-            throw new NotImplementedException();
+            Move();
+        }
+
+        private void Move()
+        {
+            var centerCity = new Vector3(transform.position.x, _cityPos.y);
+            transform.DOMove(centerCity, 2f)
+                .OnComplete(Attack);
         }
 
         private void Attack()
         {
-            OnAttack?.Invoke(_damage);
+            var torpedo = _resolver.Instantiate(_torpedo, transform.position, Quaternion.identity);
+            torpedo.OnDie += Attack;
+        }
+
+        public override void Die()
+        {
+            // TODO: Сделать взрыв
+            Destroy(gameObject);
         }
     }
 }
