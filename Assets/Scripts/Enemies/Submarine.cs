@@ -36,6 +36,8 @@ namespace DefaultNamespace.Enemies
             _cityPos = city.transform.position;
 
             _resolver = resolver;
+            
+            Health = 10;
         }
 
         private void Start()
