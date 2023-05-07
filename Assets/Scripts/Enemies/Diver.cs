@@ -42,7 +42,7 @@ namespace DefaultNamespace.Enemies
 
         public override void Die()
         {
-            Debug.Log("Diver die");
+            GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Animator>().SetBool("Die", true);
         }
 

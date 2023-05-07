@@ -21,10 +21,10 @@ MonoBehaviour:
   _shipSpeed: 1
   _shipDamage: 10
   _shipHealth: 5
-  _submarineSpeed: 1
+  _submarineDuration: 2
   _submarineDamage: 10
   _submarineHealth: 5
-  _torpedoDuration: 1
+  _torpedoDuration: 2
   _soundWavePrefab: {fileID: 5408364452416598573, guid: a7f67d3819740ce4e8acd83bfcbe3f50, type: 3}
   _soundWaveDuration: 5
   _soundWaveScaleMultiplier: 5
@@ -39,9 +39,9 @@ MonoBehaviour:
   - {x: -10.033, y: -4.787, z: 0}
   - {x: 8.349, y: 2.92, z: 0}
   - {x: -10.033, y: 2.92, z: 0}
-  _startSpawnDivers: 0.5
-  _endSpawnDivers: 2
-  _startSpawnSubmarines: 100
-  _endSpawnSubmarines: 150
-  _startSpawnShips: 1
-  _endSpawnShips: 3
+  _startSpawnDivers: 20
+  _endSpawnDivers: 30
+  _startSpawnSubmarines: 2
+  _endSpawnSubmarines: 5
+  _startSpawnShips: 30
+  _endSpawnShips: 40

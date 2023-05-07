@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -32,11 +31,12 @@ namespace DefaultNamespace
                 return;
             
             Health -= damage;
-            PlayDamagedAnimation();
             if (Health <= 0)
             {
                 Die();
             }
+
+            PlayDamagedAnimation();
         }
 
         public abstract void Die();    

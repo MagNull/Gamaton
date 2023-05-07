@@ -34,11 +34,16 @@ namespace DefaultNamespace
         
         [Header("Submarine")]
         [SerializeField]
-        private float _submarineSpeed = 1f;
+        private float _submarineDuration = 2f;
         [SerializeField]
         private int _submarineDamage = 10;
         [SerializeField]
         private int _submarineHealth = 5;
+        [SerializeField]
+        private float _submarineCooldown;
+        
+        
+        [Header("Torpedo")]
         [SerializeField]
         private float _torpedoDuration;
         
@@ -87,7 +92,7 @@ namespace DefaultNamespace
         
         public float DriverSpeed => _driverSpeed;
         public float ShipSpeed => _shipSpeed;
-        public float SubmarineSpeed => _submarineSpeed;
+        public float SubmarineDuration => _submarineDuration;
 
         public int DriverDamage => _driverDamage;
         public int ShipDamage => _shipDamage;
@@ -96,6 +101,7 @@ namespace DefaultNamespace
         public int DriverHealth => _driverHealth;
         public int ShipHealth => _shipHealth;
         public int SubmarineHealth => _submarineHealth;
+        public float SubmarineCooldown => _submarineCooldown;
         public float TorpedoDuration => _torpedoDuration;
         
         public GameObject SoundWavePrefab => _soundWavePrefab;

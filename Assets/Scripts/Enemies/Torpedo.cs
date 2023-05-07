@@ -22,15 +22,13 @@ namespace DefaultNamespace.Enemies
         private Vector3 _cityPos;
         private float _duration;
 
-        public event Action OnDie; 
-
         [Inject]
         private void Construct(Configs configs, City city)
         {
             _cityPos = city.transform.position;
             _duration = configs.TorpedoDuration;
         }
-        
+
         private void Start()
         {
             Health = 1;
@@ -39,24 +37,20 @@ namespace DefaultNamespace.Enemies
 
         private void Launch()
         {
-            var target = _cityPos - transform.position;
-            var sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMoveY(-1f, 0.1f))
-                .Append(transform.DOMoveX(6f, 0.4f))
-                .Append(transform.DOMove(target, _duration));
+            var onLeftSide = transform.position.x < _cityPos.x;
+            transform.DOMoveY(-1f, 1f)
+                .OnComplete(() => transform.DOMoveX(onLeftSide ? 2f : -2f, 0.5f)
+                    .OnComplete(() => transform.DOMove(_cityPos, _duration)));
         }
 
-        
 
         public override void Die()
         {
-            OnDie?.Invoke();
-            // TODO: Сделать анимацию
-            // GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            // GetComponent<Animator>().SetBool("Explode", true);
-            Destroy();
+            transform.DOKill();
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<Animator>().SetBool("Explode", true);
         }
-        
+
         public void Destroy() => Destroy(gameObject);
     }
 }

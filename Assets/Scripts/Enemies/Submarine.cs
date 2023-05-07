@@ -12,23 +12,29 @@ namespace DefaultNamespace.Enemies
         private int _damage;
         protected override int Damage => _damage;
         private int _health;
+
         protected override int Health
         {
             get => _health;
             set => _health = value;
         }
+
         private Vector3 _cityPos;
         private IObjectResolver _resolver;
+        private float _duration;
+        private float _cooldown;
 
         [Inject]
         public void Construct(Configs configs, City city, IObjectResolver resolver)
         {
             _damage = configs.SubmarineDamage;
             _health = configs.SubmarineHealth;
-            // TODO: Прокинуть duration
+            _duration = configs.SubmarineDuration;
+
+            _cooldown = configs.SubmarineCooldown;
             
             _cityPos = city.transform.position;
-            
+
             _resolver = resolver;
         }
 
@@ -40,19 +46,21 @@ namespace DefaultNamespace.Enemies
         private void Move()
         {
             var centerCity = new Vector3(transform.position.x, _cityPos.y);
-            transform.DOMove(centerCity, 2f)
-                .OnComplete(Attack);
+            var sequence = DOTween.Sequence();
+            sequence.Append(transform.DOMove(centerCity, _duration)
+                .OnComplete(Attack))
+                .AppendInterval(_cooldown);
         }
 
         private void Attack()
         {
-            var torpedo = _resolver.Instantiate(_torpedo, transform.position, Quaternion.identity);
-            torpedo.OnDie += Attack;
+            _resolver.Instantiate(_torpedo, transform.position, transform.rotation);
         }
 
         public override void Die()
         {
-            // TODO: Сделать взрыв
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<Animator>().SetBool("Explode", true);
             Destroy(gameObject);
         }
     }
