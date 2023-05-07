@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using VContainer;
 
 namespace DefaultNamespace.Enemies
 {
@@ -17,9 +18,11 @@ namespace DefaultNamespace.Enemies
             set => _health = value;
         }
 
-        private void Start()
+        [Inject]
+        public void Construct(Configs configs)
         {
-            Health = 1;
+            _damage = configs.BombDamage;
+            _health = configs.BombHealth;
         }
 
         public override void Die()
