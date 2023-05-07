@@ -1,5 +1,6 @@
 using DefaultNamespace;
 using DG.Tweening;
+using UnityEngine;
 using VContainer;
 
 public class PointExplosion : DamageActor
@@ -28,9 +29,11 @@ public class PointExplosion : DamageActor
 
     private void Start()
     {
+        transform.localScale = Vector3.zero;
         transform.DOScale(_scaleMultiplier, _spreadingDuration)
-            .SetEase(Ease.OutCubic)
-            .OnComplete(() => Destroy(gameObject));
+            .SetEase(Ease.Flash)
+            .OnComplete(() =>  transform.DOScale(0, _spreadingDuration)
+                .SetEase(Ease.Flash).OnComplete(() => Destroy(gameObject)));
     }
 
     public override void Die()

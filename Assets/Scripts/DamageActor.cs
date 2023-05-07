@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -44,6 +45,7 @@ namespace DefaultNamespace
         
         private void PlayDamagedAnimation()
         {
+            _spriteRenderer.DOComplete();
             var color = _spriteRenderer.color;
             var sequence = DOTween.Sequence();
             sequence.Append(_spriteRenderer.DOColor(Color.red, Duration));

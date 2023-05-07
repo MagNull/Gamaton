@@ -17,31 +17,32 @@ MonoBehaviour:
   _shipPrefab: {fileID: 473504640586642286, guid: bb3dc38a0f5c6405e8c78afea3e09a91, type: 3}
   _driverSpeed: 1
   _driverDamage: 10
-  _driverHealth: 1
+  _driverHealth: 3
   _shipSpeed: 1
   _shipDamage: 10
-  _shipHealth: 5
+  _shipHealth: 10
   _submarineDuration: 2
   _submarineDamage: 10
   _submarineHealth: 5
+  _submarineCooldown: 0
   _torpedoDuration: 2
   _soundWavePrefab: {fileID: 5408364452416598573, guid: a7f67d3819740ce4e8acd83bfcbe3f50, type: 3}
   _soundWaveDuration: 5
   _soundWaveScaleMultiplier: 5
-  _soundWaveDamage: 10
+  _soundWaveDamage: 1
   _soundWaveHealth: 1
   _pointExplosionPrefab: {fileID: 323118179261435316, guid: a90da22ec986df041b1f23ed6ab2186b, type: 3}
-  _pointExplosionDuration: 2
-  _pointExplosionScaleMultiplier: 2
-  _pointExplosionDamage: 10
-  _pointExplosionHealth: 1
+  _pointExplosionDuration: 0.3
+  _pointExplosionScaleMultiplier: 2.5
+  _pointExplosionDamage: 2
+  _pointExplosionHealth: 100
   _spawns:
   - {x: -10.033, y: -4.787, z: 0}
   - {x: 8.349, y: 2.92, z: 0}
   - {x: -10.033, y: 2.92, z: 0}
-  _startSpawnDivers: 20
-  _endSpawnDivers: 30
+  _startSpawnDivers: 0.8
+  _endSpawnDivers: 2
   _startSpawnSubmarines: 2
-  _endSpawnSubmarines: 5
-  _startSpawnShips: 30
-  _endSpawnShips: 40
+  _endSpawnSubmarines: 6
+  _startSpawnShips: 5
+  _endSpawnShips: 15

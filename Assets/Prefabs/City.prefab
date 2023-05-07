@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6550065604256776573}
   - component: {fileID: 6550065604256776575}
   - component: {fileID: 6550065604256776574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
+  _renderer: {fileID: 0}
+  _explosed: {fileID: 0}
+  _bar: {fileID: 0}
+  OnExplosion:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &6550065604256776574
 BoxCollider2D:
   m_ObjectHideFlags: 0
