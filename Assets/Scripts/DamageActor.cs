@@ -9,6 +9,7 @@ namespace DefaultNamespace
         private const float Duration = 0.1f;
         
         protected SpriteRenderer _spriteRenderer;
+        public Action<int> OnDamage;
         
         protected abstract int Damage { get; }
         protected abstract int Health { get; set; }
@@ -28,9 +29,9 @@ namespace DefaultNamespace
 
         public void TakeDamage(int damage)
         {
-            if(Health <= 0)
-                return;
-            
+            if (damage >= Health)
+                damage = Health;
+            OnDamage?.Invoke(damage);
             Health -= damage;
             PlayDamagedAnimation();
             if (Health <= 0)
