@@ -35,6 +35,7 @@ namespace DefaultNamespace
             Health -= damage;
             if (Health <= 0)
             {
+                GetComponent<Collider2D>().enabled = false;
                 Die();
             }
 
@@ -47,9 +48,7 @@ namespace DefaultNamespace
         {
             _spriteRenderer.DOComplete();
             var color = _spriteRenderer.color;
-            var sequence = DOTween.Sequence();
-            sequence.Append(_spriteRenderer.DOColor(Color.red, Duration));
-            sequence.Append(_spriteRenderer.DOColor(color, Duration));
+            _spriteRenderer.DOColor(Color.red, Duration).OnComplete(() => _spriteRenderer.DOColor(color, Duration));
         }
     }
 }
