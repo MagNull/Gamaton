@@ -27,6 +27,8 @@ namespace DefaultNamespace.Enemies
         {
             _cityPos = city.transform.position;
             _duration = configs.TorpedoDuration;
+
+            _damage = 10;
         }
 
         private void Start()
