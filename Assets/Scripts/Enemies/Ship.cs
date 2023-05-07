@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace DefaultNamespace.Enemies
@@ -16,7 +17,9 @@ namespace DefaultNamespace.Enemies
         private float _centerPositionX;
         private Vector3 _endPosition;
         private Sequence _sequence;
-        
+        private AudioClip _deathSound;
+        private AudioClip _bombReleaseSound;
+        private AudioSource _audioSource;
         protected override int Damage => _damage;
         protected override int Health 
         {
@@ -32,10 +35,13 @@ namespace DefaultNamespace.Enemies
             _damage = configs.ShipDamage;
             _health = configs.ShipHealth;
             _endPosition = configs.Spawns.Last(x => x != transform.position);
+            _deathSound = configs.ShipDeathSound;
+            _bombReleaseSound = configs.ShipBombReleaseSound;
         }
         
         private void Start()
         {
+            _audioSource = new GameObject().AddComponent<AudioSource>();
             Move();
         }
 
@@ -55,11 +61,13 @@ namespace DefaultNamespace.Enemies
 
         private void Attack()
         {
+            _audioSource.PlayOneShot(_bombReleaseSound);
             Instantiate(_bomb, transform.position, Quaternion.identity);
         }
 
         public override void Die()
         {
+            _audioSource.PlayOneShot(_deathSound);
             if(_sequence is not null && _sequence.IsActive())
                 _sequence.Kill();
             Destroy(gameObject);

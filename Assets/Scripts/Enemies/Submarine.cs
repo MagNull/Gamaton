@@ -23,7 +23,9 @@ namespace DefaultNamespace.Enemies
         private IObjectResolver _resolver;
         private float _duration;
         private float _cooldown;
-
+        private AudioClip _deathSound;
+        private AudioClip _torpedoReleaseSound;
+        private AudioSource _audioSource;
         [Inject]
         public void Construct(Configs configs, City city, IObjectResolver resolver)
         {
@@ -35,13 +37,15 @@ namespace DefaultNamespace.Enemies
             
             _cityPos = city.transform.position;
 
-            _resolver = resolver;
+            _torpedoReleaseSound = configs.SubmarineTorpedoReleaseSound;
+            _deathSound = configs.SubmarineDeathSound;
             
-            Health = 10;
+            _resolver = resolver;
         }
 
         private void Start()
         {
+            _audioSource = new GameObject().AddComponent<AudioSource>();
             Move();
         }
 
@@ -56,11 +60,13 @@ namespace DefaultNamespace.Enemies
 
         private void Attack()
         {
+            _audioSource.PlayOneShot(_torpedoReleaseSound, 2f);
             _resolver.Instantiate(_torpedo, transform.position, transform.rotation);
         }
 
         public override void Die()
         {
+            _audioSource.PlayOneShot(_deathSound, 2f);
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             GetComponent<Animator>().SetBool("Explode", true);
             Destroy(gameObject);

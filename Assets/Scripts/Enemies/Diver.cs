@@ -11,6 +11,7 @@ namespace DefaultNamespace.Enemies
         private float _speed;
         private Vector3 _endPosition;
         private Action<int> _onAttack;
+        private AudioClip _deathSound;
         protected override int Damage => _damage;
         private int _health;
         protected override int Health
@@ -23,9 +24,10 @@ namespace DefaultNamespace.Enemies
         public void Construct(City city, Configs configs)
         {
             _endPosition = city.transform.position;
-            _speed = configs.DriverSpeed;
-            _damage = configs.DriverDamage;
-             Health = configs.DriverHealth;
+            _speed = configs.DiverSpeed;
+            _damage = configs.DiverDamage;
+            _health = configs.DiverHealth;
+            _deathSound = configs.DiverDeathSound;
         }
 
         private void Start()
@@ -42,6 +44,8 @@ namespace DefaultNamespace.Enemies
 
         public override void Die()
         {
+            var source = new GameObject().AddComponent<AudioSource>();
+            source.PlayOneShot(_deathSound, .1f);
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Animator>().SetBool("Die", true);
         }

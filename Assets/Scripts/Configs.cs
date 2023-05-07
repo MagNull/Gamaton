@@ -16,13 +16,16 @@ namespace DefaultNamespace
         [SerializeField]
         private Ship _shipPrefab;
         
-        [Header("Driver")]
+        
+        [Header("Diver")]
         [SerializeField]
-        private float _driverSpeed = 1f;
+        private float _diverSpeed = 1f;
         [SerializeField]
-        private int _driverDamage = 10;
+        private int _diverDamage = 10;
         [SerializeField] 
-        private int _driverHealth = 5;
+        private int _diverHealth = 5;
+        [SerializeField]
+        private AudioClip _diverDeathSound;
 
         [Header("Ship")] 
         [SerializeField] 
@@ -31,12 +34,18 @@ namespace DefaultNamespace
         private int _shipDamage = 10;
         [SerializeField]
         private int _shipHealth = 5;
+        [SerializeField]
+        private AudioClip _shipDeathSound;
+        [SerializeField]
+        private AudioClip _shipBombReleaseSound;
         
         [Header("Bomb")]
         [SerializeField]
         private int _bombHealth;
         [SerializeField]
         private int _bombDamage;
+        [SerializeField]
+        private AudioClip _bombExplosionSound;
         
         [Header("Submarine")]
         [SerializeField]
@@ -47,6 +56,10 @@ namespace DefaultNamespace
         private int _submarineHealth = 5;
         [SerializeField]
         private float _submarineCooldown;
+        [SerializeField]
+        private AudioClip _submarineDeathSound;
+        [SerializeField]
+        private AudioClip _submarineTorpedoReleaseSound;
         
         [Header("Torpedo")]
         [SerializeField]
@@ -55,6 +68,8 @@ namespace DefaultNamespace
         private int _torpedoHealth;
         [SerializeField]
         private int _torpedoDamage;
+        [SerializeField]
+        private AudioClip _torpedoDeathSound;
 
         [Header("Sound Wave")]
         [SerializeField]
@@ -67,6 +82,8 @@ namespace DefaultNamespace
         private int _soundWaveDamage;
         [SerializeField]
         private int _soundWaveHealth;
+        [SerializeField]
+        private AudioClip _soundWaveReleaseSound;
 
         [Header("Point Explosion")]
         [SerializeField] 
@@ -79,6 +96,8 @@ namespace DefaultNamespace
         private int _pointExplosionDamage;
         [SerializeField]
         private int _pointExplosionHealth;
+        [SerializeField]
+        private AudioClip _pointExplosionReleaseSound;
         
         [SerializeField]
         private List<Vector3> _spawns;
@@ -96,19 +115,30 @@ namespace DefaultNamespace
         private float _startSpawnShips = 10f;
         [SerializeField]
         private float _endSpawnShips = 15f;
+
+
+        public AudioClip DiverDeathSound => _diverDeathSound;
+        public AudioClip ShipDeathSound => _shipDeathSound;
+        public AudioClip ShipBombReleaseSound => _shipBombReleaseSound;
+        public AudioClip BombExplosionSound => _bombExplosionSound;
+        public AudioClip SubmarineDeathSound => _submarineDeathSound;
+        public AudioClip SubmarineTorpedoReleaseSound => _submarineTorpedoReleaseSound;
+        public AudioClip TorpedoDeathSound => _torpedoDeathSound;
+        public AudioClip SoundWaveReleaseSound => _soundWaveReleaseSound;
+        public AudioClip PointExplosionReleaseSound => _pointExplosionReleaseSound;
+
         
-        
-        public float DriverSpeed => _driverSpeed;
+        public float DiverSpeed => _diverSpeed;
         public float ShipSpeed => _shipSpeed;
         public float SubmarineDuration => _submarineDuration;
 
-        public int DriverDamage => _driverDamage;
+        public int DiverDamage => _diverDamage;
         public int ShipDamage => _shipDamage;
         public int BombDamage => _bombDamage;
         public int BombHealth => _bombHealth;
         public int SubmarineDamage => _submarineDamage;
         
-        public int DriverHealth => _driverHealth;
+        public int DiverHealth => _diverHealth;
         public int ShipHealth => _shipHealth;
         public int SubmarineHealth => _submarineHealth;
         public float SubmarineCooldown => _submarineCooldown;

@@ -17,7 +17,8 @@ public class PointExplosion : DamageActor
         set => _health = value;
     }
 
-
+    private AudioClip _releaseSound;
+    
     [Inject]
     public void Construct(Configs configs)
     {
@@ -25,10 +26,13 @@ public class PointExplosion : DamageActor
         _spreadingDuration = configs.PointExplosionDuration;
         _damage = configs.PointExplosionDamage;
         _health = configs.PointExplosionHealth;
+        _releaseSound = configs.PointExplosionReleaseSound;
     }
 
     private void Start()
     {
+        var source = new GameObject().AddComponent<AudioSource>();
+        source.PlayOneShot(_releaseSound);
         transform.localScale = Vector3.zero;
         transform.DOScale(_scaleMultiplier, _spreadingDuration)
             .SetEase(Ease.OutQuad)

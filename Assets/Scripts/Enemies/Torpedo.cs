@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using VContainer;
 
@@ -21,19 +20,20 @@ namespace DefaultNamespace.Enemies
 
         private Vector3 _cityPos;
         private float _duration;
-
+        private AudioClip _explosionSound;
         [Inject]
         private void Construct(Configs configs, City city)
         {
             _cityPos = city.transform.position;
+            
             _duration = configs.TorpedoDuration;
-
-            _damage = 10;
+            _damage = configs.TorpedoDamage;
+            _health = configs.TorpedoHealth;
+            _explosionSound = configs.TorpedoDeathSound;
         }
 
         private void Start()
         {
-            Health = 1;
             Launch();
         }
 
@@ -48,6 +48,8 @@ namespace DefaultNamespace.Enemies
 
         public override void Die()
         {
+            var source = new GameObject().AddComponent<AudioSource>();
+            source.PlayOneShot(_explosionSound, 2f);
             transform.DOKill();
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             GetComponent<Animator>().SetBool("Explode", true);

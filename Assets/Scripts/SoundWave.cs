@@ -18,6 +18,7 @@ public class SoundWave : DamageActor
         set => _health = value;
     }
 
+    private AudioClip _releaseSound;
 
     [Inject]
     public void Construct(Configs configs)
@@ -26,10 +27,13 @@ public class SoundWave : DamageActor
         _spreadingDuration = configs.SoundWaveDuration;
         _damage = configs.SoundWaveDamage;
         _health = configs.SoundWaveHealth;
+        _releaseSound = configs.SoundWaveReleaseSound;
     }
 
     private void Start()
     {
+        var source = new GameObject().AddComponent<AudioSource>();
+        source.PlayOneShot(_releaseSound, .3f);
         transform.DOScale(_scaleMultiplier, _spreadingDuration);
         transform.Rotate(Vector3.up, -90f);
     }
