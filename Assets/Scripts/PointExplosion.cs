@@ -33,7 +33,7 @@ public class PointExplosion : DamageActor
             .OnComplete(() => Destroy(gameObject));
     }
 
-    protected override void OnDie()
+    public override void Die()
     {
         Destroy(gameObject);
     }

@@ -58,7 +58,7 @@ namespace DefaultNamespace.Enemies
             Instantiate(_bomb, transform.position, Quaternion.identity);
         }
 
-        protected override void OnDie()
+        public override void Die()
         {
             if(_sequence is not null && _sequence.IsActive())
                 _sequence.Kill();

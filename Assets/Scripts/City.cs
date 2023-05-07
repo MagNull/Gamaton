@@ -25,7 +25,7 @@ namespace DefaultNamespace
 
         public event Action OnExplosion;
 
-        protected override void OnDie()
+        public override void Die()
         {
             Explosion();
         }

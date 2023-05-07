@@ -39,6 +39,9 @@ namespace DefaultNamespace
         private int _submarineDamage = 10;
         [SerializeField]
         private int _submarineHealth = 5;
+        [SerializeField]
+        private float _torpedoDuration;
+        
         
         [Header("Sound Wave")]
         [SerializeField]
@@ -93,6 +96,7 @@ namespace DefaultNamespace
         public int DriverHealth => _driverHealth;
         public int ShipHealth => _shipHealth;
         public int SubmarineHealth => _submarineHealth;
+        public float TorpedoDuration => _torpedoDuration;
         
         public GameObject SoundWavePrefab => _soundWavePrefab;
         public float SoundWaveScaleMultiplier => _soundWaveScaleMultiplier;

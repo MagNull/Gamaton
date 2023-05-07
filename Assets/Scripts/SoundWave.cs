@@ -40,7 +40,7 @@ public class SoundWave : DamageActor
     }
 
 
-    protected override void OnDie()
+    public override void Die()
     {
         Destroy(gameObject);
     }

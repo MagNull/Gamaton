@@ -35,11 +35,11 @@ namespace DefaultNamespace
             PlayDamagedAnimation();
             if (Health <= 0)
             {
-                OnDie();
+                Die();
             }
         }
 
-        protected abstract void OnDie();    
+        public abstract void Die();    
         
         private void PlayDamagedAnimation()
         {
