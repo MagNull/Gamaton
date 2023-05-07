@@ -26,12 +26,14 @@ namespace DefaultNamespace.Enemies
         private void Construct(Configs configs, City city)
         {
             _cityPos = city.transform.position;
+            
             _duration = configs.TorpedoDuration;
+            _damage = configs.TorpedoDamage;
+            _health = configs.TorpedoHealth;
         }
 
         private void Start()
         {
-            Health = 1;
             Launch();
         }
 
